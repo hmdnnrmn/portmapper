@@ -292,6 +292,11 @@ public class EditPresetDialog extends JDialog {
     @Action(name = ACTION_SAVE)
     public void save() {
 
+        if (portsTable.isEditing() && !portsTable.getCellEditor().stopCellEditing()) {
+            showErrorMessage(PRESET_DIALOG_ERROR_TITLE, "preset_dialog.error.invalid_port");
+            return;
+        }
+
         // Check, if the user entered a name for the preset and show an error
         // message.
         final String name = presetNameTextField.getText();
